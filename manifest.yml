@@ -1,0 +1,48 @@
+modules:
+  # ── Jira issue webhooks ────────────────────────────────────────────────────
+  # DevResolve intercepts issue creation and status changes.
+  # Forge Remote forwards these events to api.devresolve.ai.
+  jira:issueCreated:
+    - key: devresolve-issue-created
+      function: devresolve-remote-handler
+  jira:issueTransitioned:
+    - key: devresolve-issue-transitioned
+      function: devresolve-remote-handler
+
+  # ── Forge Remote function ──────────────────────────────────────────────────
+  # Routes all Jira events to the DevResolve API server.
+  function:
+    - key: devresolve-remote-handler
+      handler: index.handler
+      remote: devresolve-api
+
+  # ── App configuration page (shown in Jira admin) ──────────────────────────
+  jira:adminPage:
+    - key: devresolve-config
+      function: devresolve-config-page
+      title: DevResolve Configuration
+
+  function:
+    - key: devresolve-config-page
+      handler: config.handler
+
+remotes:
+  # ── DevResolve API server ─────────────────────────────────────────────────
+  - key: devresolve-api
+    baseUrl: https://api.devresolve.ai
+    auth:
+      appSystemToken: true
+
+app:
+  id: ari:cloud:ecosystem::app/devresolve-jira-forge
+  name: DevResolve
+
+permissions:
+  scopes:
+    - read:jira-work
+    - write:jira-work
+    - read:jira-user
+  external:
+    fetch:
+      backend:
+        - https://api.devresolve.ai
