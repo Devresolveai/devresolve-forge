@@ -21,17 +21,16 @@ modules:
 
   jira:projectPage:
     - key: devresolve-project-page
-      resource: main
-      render: native
+      function: dr-page-fn
       title: DevResolve
+
+  function:
+    - key: dr-page-fn
+      handler: frontend/index.run
 
 remotes:
   - key: devresolve-api
     baseUrl: https://api.devresolve.ai
-
-resources:
-  - key: main
-    path: static/index.html
 
 app:
   id: ari:cloud:ecosystem::app/a59d630a-06ca-48ec-85e0-0f26bb09e4d1

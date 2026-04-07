@@ -13,7 +13,8 @@
   },
   "dependencies": {
     "@forge/api": "^7.1.2",
-    "@forge/resolver": "^1.7.0"
+    "@forge/resolver": "^1.7.0",
+    "@forge/ui": "^1.11.4"
   },
   "devDependencies": {
     "@forge/cli": "^12.0.0",
