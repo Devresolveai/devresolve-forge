@@ -21,12 +21,13 @@ modules:
 
   jira:projectPage:
     - key: devresolve-project-page
-      function: dr-page-fn
+      resource: main
+      render: native
       title: DevResolve
 
-  function:
-    - key: dr-page-fn
-      handler: frontend/index.run
+resources:
+  - key: main
+    path: src/frontend/index.jsx
 
 remotes:
   - key: devresolve-api
