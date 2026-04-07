@@ -37,4 +37,4 @@ permissions:
   external:
     fetch:
       backend:
-        - https://api.devresolve.ai
+        - address: https://api.devresolve.ai
