@@ -7,18 +7,10 @@ modules:
     - key: devresolve-issue-transitioned
       function: devresolve-remote-handler
 
-  jira:adminPage:
-    - key: devresolve-config
-      function: devresolve-config-page
-      title: DevResolve Configuration
-
   function:
     - key: devresolve-remote-handler
       handler: index.handler
       remote: devresolve-api
-
-    - key: devresolve-config-page
-      handler: config.handler
 
 remotes:
   - key: devresolve-api
