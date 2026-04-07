@@ -1,22 +1,27 @@
 modules:
-  jira:issueCreated:
-    - key: devresolve-issue-created
-      function: devresolve-remote-handler
+  trigger:
+    - key: devresolve-issue-created-trigger
+      endpoint: devresolve-endpoint
+      events:
+        - avi:jira:created:issue
 
-  jira:issueTransitioned:
-    - key: devresolve-issue-transitioned
-      function: devresolve-remote-handler
+    - key: devresolve-issue-updated-trigger
+      endpoint: devresolve-endpoint
+      events:
+        - avi:jira:updated:issue
 
-  function:
-    - key: devresolve-remote-handler
-      handler: index.handler
+  endpoint:
+    - key: devresolve-endpoint
       remote: devresolve-api
+      route:
+        path: /webhooks/jira/forge
+      auth:
+        appSystemToken:
+          enabled: true
 
 remotes:
   - key: devresolve-api
     baseUrl: https://api.devresolve.ai
-    auth:
-      appSystemToken: true
 
 app:
   id: ari:cloud:ecosystem::app/a59d630a-06ca-48ec-85e0-0f26bb09e4d1
@@ -28,6 +33,7 @@ permissions:
     - read:jira-work
     - write:jira-work
     - read:jira-user
+    - read:app-system-token
   external:
     fetch:
       backend:
